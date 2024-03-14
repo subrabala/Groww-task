@@ -2,8 +2,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import Layout from "./layout";
 
-const Summary = () => {
+const Page = () => {
+  const router = useRouter();
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
   useEffect(() => {
@@ -36,11 +39,13 @@ const Summary = () => {
     calculateTotal();
   }, [products]);
 
+
   function handleNavigatePayment() {
-    console.log("handleNavigatePayment");
-  }
+    router.push("/payment");
+  };
 
   return (
+    <Layout>
     <div className="h-screen p-8 gap-8 flex">
       <div className="w-3/5">
         <h1 className="p-8 text-3xl font-medium">Checkout</h1>
@@ -98,17 +103,20 @@ const Summary = () => {
         </div>
         <div className="flex gap-2">
           <input className="w-3/4 p-2 rounded-md" placeholder="Discount Code" />
-          <button className="w-1/4 text-center p-2 px-4 border border-primary rounded-md">Apply</button>
+          <button className="w-1/4 text-center p-2 px-4 border border-primary rounded-md">
+            Apply
+          </button>
         </div>
         <button
           className="px-8 py-2 bg-primary text-white font-medium rounded-md"
-          onClick={()=>{navigate("/payment")}}
+          onClick={handleNavigatePayment}
         >
           Payment
         </button>
       </div>
     </div>
+    </Layout>
   );
 };
 
-export default Summary;
+export default Page;
