@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import useProductsStore from "../products-store";
+import useProductsStore from "../../stores/products-store";
 import { FaCreditCard, FaMoneyCheck, FaPhone } from "react-icons/fa";
 import Layout from "../layout";
 import Image from "next/image";

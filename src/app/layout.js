@@ -22,6 +22,7 @@ const Layout = ({ children }) => {
     <html lang="en">
       <Head>
         <link rel="stylesheet" href={inter.url} />
+        <link rel="icon" href="/favicon.ico" />{" "}
       </Head>
       <body className={`theme-${theme}`}>
         <button
@@ -34,7 +35,9 @@ const Layout = ({ children }) => {
         <style jsx global>{`
           :root {
             --primary-color: #692deb;
-            --secondary-color: var(--secondary-color-light); // Default to light secondary color
+            --secondary-color: var(
+              --secondary-color-light
+            ); // Default to light secondary color
           }
           .theme-light {
             background-color: #ffffff;
@@ -46,7 +49,7 @@ const Layout = ({ children }) => {
           }
           body {
             margin: 0;
-            --secondary-color: var(--secondary-color); 
+            --secondary-color: var(--secondary-color);
           }
         `}</style>
       </body>

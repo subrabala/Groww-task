@@ -4,7 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Layout from "./layout";
-import useProductsStore from "./products-store";
+import useProductsStore from "../stores/products-store";
 
 const Page = () => {
   const products = useProductsStore((state) => state.products);
