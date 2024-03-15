@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import useProductsStore from "../products-store";
-import { FaCreditCard, FaMoneyCheck } from "react-icons/fa";
+import { FaCreditCard, FaMoneyCheck, FaPhone } from "react-icons/fa";
 import Layout from "../layout";
 import Image from "next/image";
 import  { useRouter } from "next/navigation";
@@ -47,10 +47,10 @@ const Payment = () => {
                     onClick={() => handleMethodClick(method)}
                   >
                     <div className="flex gap-2 text-xl">
-                      {method === "UPI" && <FaMoneyCheck size={24} />}
+                      {method === "UPI" && <FaPhone size={24} />}
                       {method === "CARDS" && <FaCreditCard size={24} />}
                       {method !== "UPI" && method !== "CARDS" && (
-                        <DefaultIcon size={24} />
+                        <FaMoneyCheck size={24} />
                       )}
                       <span className="px-2">{method}</span>
                     </div>
