@@ -20,8 +20,9 @@ const Page = () => {
 
         if (response.data.products && response.data.products.length > 0) {
           useProductsStore.setState({ products: response.data.products });
-          useProductsStore.setState({ paymentMethods: response.data.paymentMethods });
-
+          useProductsStore.setState({
+            paymentMethods: response.data.paymentMethods,
+          });
         }
         console.log("Data", response);
       } catch (error) {
@@ -31,7 +32,6 @@ const Page = () => {
 
     fetchData();
   }, []);
-  
 
   useEffect(() => {
     async function calculateTotal() {
@@ -47,6 +47,52 @@ const Page = () => {
   function handleNavigatePayment() {
     router.push("/payment");
   }
+
+  const [discountCode, setDiscountCode] = useState("");
+  const [discountStatus, setDiscountStatus] = useState({
+    valid: false,
+    message: "",
+  });
+
+  const handleDiscountChange = (event) => {
+    const { value } = event.target;
+    setDiscountCode(value);
+    setDiscountStatus({ valid: false, message: "" });
+  };
+
+  const applyDiscount = () => {
+    const validCoupons = ["NEW50", "NEW100", "NEW300", "NEW500"];
+    if (validCoupons.includes(discountCode)) {
+      setDiscountStatus({
+        valid: true,
+        message: "Yay! Your discount has been applied",
+      });
+
+      let discount = 0;
+      switch (discountCode) {
+        case "NEW50":
+          discount = 50;
+          break;
+        case "NEW100":
+          discount = 100;
+          break;
+        case "NEW300":
+          discount = 300;
+          break;
+        case "NEW500":
+          discount = 500;
+          break;
+        default:
+          break;
+      }
+      setTotal(total - discount);
+    } else {
+      setDiscountStatus({
+        valid: false,
+        message: "Invalid coupon. Please enter a valid coupon code",
+      });
+    }
+  };
 
   return (
     <Layout>
@@ -107,15 +153,22 @@ const Page = () => {
             <div className="font-semibold text-xl  flex justify-between">
               Total :<span className="font-bold text-2xl">${total}</span>
             </div>
-            <div className="flex gap-2">
-              <input
-                className="w-3/4 p-2 rounded-md"
-                placeholder="Discount Code"
-              />
-              <button className="w-1/4 text-center p-2 px-4 border border-primary rounded-md">
-                Apply
-              </button>
-            </div>
+              <div className="flex gap-2 w-full">
+                <input
+                  className={`w-3/4 p-2 rounded-md ${
+                    discountStatus.valid ? "border-green-500" : "border-red-500"
+                  }`}
+                  placeholder="Discount Code"
+                  value={discountCode}
+                  onChange={handleDiscountChange}
+                />
+                <button
+                  className="w-1/4 text-center p-2 px-4 border border-primary rounded-md"
+                  onClick={applyDiscount}
+                >
+                  Apply
+                </button>
+              </div>
             <button
               className="px-8 py-2 bg-primary text-white font-medium rounded-md"
               onClick={handleNavigatePayment}

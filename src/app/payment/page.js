@@ -5,7 +5,10 @@ import useProductsStore from "../products-store";
 import { FaCreditCard, FaMoneyCheck } from "react-icons/fa";
 import Layout from "../layout";
 import Image from "next/image";
+import  { useRouter } from "next/navigation";
 const Payment = () => {
+
+  const router = useRouter();
   const paymentMethods = useProductsStore((state) => state.paymentMethods);
 
   const [selectedMethod, setSelectedMethod] = useState(null);
@@ -15,9 +18,11 @@ const Payment = () => {
   };
 
   function handlePayment(){
-    if(selectedMethod(null)){
+    if(selectedMethod == null){
       alert("Please select a payment method")
     }
+    router.push("/success")
+    
   }
 
   return (
@@ -34,7 +39,7 @@ const Payment = () => {
                 {paymentMethods.map((method, index) => (
                   <div
                     key={index}
-                    className={`flex items-center p-4 px-8 rounded-md justify-between ${
+                    className={`flex items-center p-4 px-8 rounded-md justify-between cursor-pointer ${
                       selectedMethod === method
                         ? "bg-violet-300 text-black"
                         : "bg-slate-200 "
