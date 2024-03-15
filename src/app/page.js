@@ -25,6 +25,7 @@ const Page = () => {
           });
         }
         console.log("Data", response);
+        alert("Discount Coupons are : NEW50, NEW100, NEW300, NEW500")
       } catch (error) {
         console.log("Error", error);
       }
@@ -32,6 +33,8 @@ const Page = () => {
 
     fetchData();
   }, []);
+
+  
 
   useEffect(() => {
     async function calculateTotal() {
@@ -169,7 +172,13 @@ const Page = () => {
                   Apply
                 </button>
               </div>
-            <button
+              <p
+                className={`${
+                  discountStatus.valid ? "text-green-500" : "text-red-500"
+                }`}
+              >
+                {discountStatus.message}
+              </p>            <button
               className="px-8 py-2 bg-primary text-white font-medium rounded-md"
               onClick={handleNavigatePayment}
             >
