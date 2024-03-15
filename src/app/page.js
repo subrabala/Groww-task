@@ -25,7 +25,7 @@ const Page = () => {
           });
         }
         console.log("Data", response);
-        alert("Discount Coupons are : NEW50, NEW100, NEW300, NEW500")
+        alert("Discount Coupons are : NEW50, NEW100, NEW300, NEW500");
       } catch (error) {
         console.log("Error", error);
       }
@@ -33,8 +33,6 @@ const Page = () => {
 
     fetchData();
   }, []);
-
-  
 
   useEffect(() => {
     async function calculateTotal() {
@@ -156,29 +154,30 @@ const Page = () => {
             <div className="font-semibold text-xl  flex justify-between">
               Total :<span className="font-bold text-2xl">${total}</span>
             </div>
-              <div className="flex gap-2 w-full">
-                <input
-                  className={`w-3/4 p-2 rounded-md ${
-                    discountStatus.valid ? "border-green-500" : "border-red-500"
-                  }`}
-                  placeholder="Discount Code"
-                  value={discountCode}
-                  onChange={handleDiscountChange}
-                />
-                <button
-                  className="w-1/4 text-center p-2 px-4 border border-primary rounded-md"
-                  onClick={applyDiscount}
-                >
-                  Apply
-                </button>
-              </div>
-              <p
-                className={`${
-                  discountStatus.valid ? "text-green-500" : "text-red-500"
+            <div className="flex gap-2 w-full">
+              <input
+                className={`w-3/4 p-2 rounded-md ${
+                  discountStatus.valid ? "border-green-500" : "border-red-500"
                 }`}
+                placeholder="Discount Code"
+                value={discountCode}
+                onChange={handleDiscountChange}
+              />
+              <button
+                className="w-1/4 text-center p-2 px-4 border border-primary rounded-md"
+                onClick={applyDiscount}
               >
-                {discountStatus.message}
-              </p>            <button
+                Apply
+              </button>
+            </div>
+            <p
+              className={`${
+                discountStatus.valid ? "text-green-500" : "text-red-600"
+              }`}
+            >
+              {discountStatus.message}
+            </p>
+            <button
               className="px-8 py-2 bg-primary text-white font-medium rounded-md"
               onClick={handleNavigatePayment}
             >
