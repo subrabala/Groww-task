@@ -172,7 +172,7 @@ const Page = () => {
             </div>
             <p
               className={`${
-                discountStatus.valid ? "text-green-500" : "text-red-600"
+                discountStatus.valid ? "text-green-500" : "text-red-500"
               }`}
             >
               {discountStatus.message}
