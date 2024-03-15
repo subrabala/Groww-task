@@ -20,7 +20,7 @@ export default function MyComponent() {
   return (
     <div className="h-screen  flex justify-center align-middle">
       <div ref={animationContainer}></div>
-      <p onClick={()=>{router.push('/')}}>Go back to Home Page</p>
+      <p onClick={()=>{router.push('/')}} className="absolute top-2 left-2 cursor-pointer px-4 p-2 bg-primary  text-white">Go back to Home Page</p>
     </div>
   );
 }
